@@ -19,11 +19,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		for(String str: interceptUri){
 			if(uri.equalsIgnoreCase(str)){
 				response.sendRedirect("/login");
+				System.out.println("拦截到了"+uri);
 				return false;
 			}
 		}
 		
-		return super.preHandle(request, response, handler);
+		return true;
 	}
 
 	

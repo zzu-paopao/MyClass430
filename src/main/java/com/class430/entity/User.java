@@ -20,18 +20,25 @@ public class User {
 	private String password;
 	private String phone;
 	private String name;
-	private Integer category;
+	private String site;
+	private String work;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="uid")
 	private List<Thing> things;
 	
 	
 	
-	public synchronized Integer getCategory() {
-		return category;
+	public synchronized String getSite() {
+		return site;
 	}
-	public synchronized void setCategory(Integer category) {
-		this.category = category;
+	public synchronized void setSite(String site) {
+		this.site = site;
+	}
+	public synchronized String getWork() {
+		return work;
+	}
+	public synchronized void setWork(String work) {
+		this.work = work;
 	}
 	public synchronized String getPhone() {
 		return phone;
