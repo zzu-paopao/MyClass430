@@ -5,6 +5,62 @@
 /*--
 	Common Css
 --*/
+#main-content {
+    margin-left: 12%;
+    margin-right: 12%;
+}
+.sidebar-closed #main-content {
+    margin-left: 0px;
+}
+.wrapper {
+    display: inline-block;
+    margin-top: 60px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-top: 0px;
+    width: 100%;
+}
+.site-min-height {
+    min-height: 900px;
+}
+.mt {
+	margin-top: 25px;
+}
+/*Content Panel*/
+.content-panel {
+	background: #ffffff;
+	box-shadow: 0px 3px 2px #aab2bd;
+	padding-top: 15px;
+	padding-bottom: 5px;
+}
+.content-panel h4 {
+	margin-left: 10px;
+}
+@media (max-width: 480px) {
+
+    .notify-row, .search, .dont-show , .inbox-head .sr-input, .inbox-head .sr-btn{
+        display: none;
+    }
+
+    #top_menu .nav > li, ul.top-menu > li {
+        float: right;
+    }
+    .hidden-phone {
+        display: none !important;
+    }
+
+    .chart-position {
+       margin-top: 0px;
+     }
+
+    .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+        background-color: #ccc;
+        border-color:#ccc ;
+    }
+
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -656,20 +712,20 @@ font header .navbar-default .navbar-nav li a:hover {
   padding-bottom: 15px;
   margin: 0px;
 }
-#contact-form .block form .form-group .form-control {
+.block form .form-group .form-control {
   background: #F6F8FA;
   height: 60px;
   border: 1px solid #EEF2F6;
   box-shadow: none;
   width: 100%;
 }
-#contact-form .block form .form-group-2 {
+.block form .form-group-2 {
   padding-bottom: 15px;
   margin: 0px;
 }
-#contact-form .block form .form-group-2 textarea {
+.block form .form-group-2 textarea {
   background: #F6F8FA;
-  height: 135px;
+  height: 400%;
   border: 1px solid #EEF2F6;
   box-shadow: none;
   width: 100%;
