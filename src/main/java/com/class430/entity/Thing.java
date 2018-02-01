@@ -2,6 +2,7 @@ package com.class430.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="thing")
@@ -22,12 +25,12 @@ public class Thing {
 	private Date time;
 	private String picture;
 	
-	@Column(insertable=false,updatable=false)
+//	@Column(insertable=false,updatable=false)
 	private Integer uid;
 	
-	@ManyToOne
-	@JoinColumn(name="uid")
-	private User user;
+//	@ManyToOne(cascade=CascadeType.ALL)
+//	@JoinColumn(name="uid")
+//	private User user;
 	public synchronized Integer getId() {
 		return id;
 	}
@@ -65,12 +68,12 @@ public class Thing {
 		this.uid = uid;
 	}
 	
-	public synchronized User getUser() {
-		return user;
-	}
-	public synchronized void setUser(User user) {
-		this.user = user;
-	}
+//	public synchronized User getUser() {
+//		return user;
+//	}
+//	public synchronized void setUser(User user) {
+//		this.user = user;
+//	}
 	public Thing() {
 		// TODO Auto-generated constructor stub
 	}

@@ -20,19 +20,20 @@ public class User {
 	private String password;
 	private String phone;
 	private String name;
-	private String site;
+	private String address;
 	private String work;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="uid")
-	private List<Thing> things;
+//	@OneToMany(mappedBy="uid")
+//	private List<Thing> things;
 	
 	
 	
-	public synchronized String getSite() {
-		return site;
+	
+	public String getAddress() {
+		return address;
 	}
-	public synchronized void setSite(String site) {
-		this.site = site;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public synchronized String getWork() {
 		return work;
@@ -70,13 +71,17 @@ public class User {
 	public synchronized void setName(String name) {
 		this.name = name;
 	}
-	public synchronized List<Thing> getThings() {
-		return things;
-	}
-	public synchronized void setThings(List<Thing> things) {
-		this.things = things;
-	}
+//	public synchronized List<Thing> getThings() {
+//		return things;
+//	}
+//	public synchronized void setThings(List<Thing> things) {
+//		this.things = things;
+//	}
 	public User() {
+		// TODO Auto-generated constructor stub
+	}
+	public User(Integer userId){
+		this.userId=userId;
 		// TODO Auto-generated constructor stub
 	}
 }

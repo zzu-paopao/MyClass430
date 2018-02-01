@@ -17,8 +17,8 @@ public class LoginController {
 	UserRepository userRepository;
 	
 	@RequestMapping("/toLogin")
-	public String login(@RequestParam(name="username",defaultValue="nothing") String username,
-						@RequestParam(name="password",defaultValue="0") String password
+	public String login(@RequestParam(name="username",defaultValue="无") String username,
+						@RequestParam(name="password",defaultValue="无") String password
 						,HttpSession session){
 		
 		User user = userRepository.getTop1ByUsernameAndPassword(username, password);
@@ -32,21 +32,25 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/toRegister")
-	public String register(@RequestParam(name="username",defaultValue="nothing") String username
-			,@RequestParam(name="password",defaultValue="0") String password
-			,@RequestParam(name="phone",defaultValue="0")String phone
+	public String register(@RequestParam(name="username",defaultValue="无") String username
+			,@RequestParam(name="password",defaultValue="无") String password
+			,@RequestParam(name="phone",defaultValue="无")String phone
 			,@RequestParam(name="name",defaultValue="张三")String name){
 		
 		User user = userRepository.getTop1ByUsername(username);
 		
-		if(user!=null){
+		if(user==null){
+			user = new User();
+			user.setUsername(username);
 			user.setName(name);
 			user.setPassword(password);
 			user.setPhone(phone);
 			userRepository.saveAndFlush(user);
 			return "redirect:/toHome";
+		}else{
+			return "error";
 		}
 		
-		return "error";
+		
 	}
 }

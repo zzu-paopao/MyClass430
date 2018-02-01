@@ -9,23 +9,23 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     
     <!-- CSS -->
-    <link rel="stylesheet" href="css/owl.carousel.css"/>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/ionicons.min.css"/>
-    <link rel="stylesheet" href="css/animate.css"/>
-    <link rel="stylesheet" href="css/responsive.css"/>
+    <link rel="stylesheet" href="/css/owl.carousel.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/ionicons.min.css"/>
+    <link rel="stylesheet" href="/css/animate.css"/>
+    <link rel="stylesheet" href="/css/responsive.css"/>
     
     <!-- Js -->
-    <script th:src="@{js/vendor/modernizr-2.6.2.min.js}"></script>
-    <script th:src="@{js/vendor/jquery-1.10.2.min.js}"></script>
-    <script th:src="@{js/bootstrap.min.js}"></script>
-    <script th:src="@{js/owl.carousel.min.js}"></script>
-    <script th:src="@{js/min/waypoints.min.js}"></script>
-    <script th:src="@{js/jquery.counterup.js}"></script>
-    <script th:src="@{js/plugins.js}"></script>
-    <script th:src="@{js/main.js}"></script>
+    <script th:src="@{/js/vendor/modernizr-2.6.2.min.js}"></script>
+    <script th:src="@{/js/vendor/jquery-1.10.2.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/min/waypoints.min.js}"></script>
+    <script th:src="@{/js/jquery.counterup.js}"></script>
+    <script th:src="@{/js/plugins.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
 </head>
 <body>
 	 <!-- Header Start -->
@@ -52,12 +52,13 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                           <ul class="nav navbar-nav navbar-right">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="work.html">MyInformation</a></li>
-                            <li><a href="#">Publish</a></li>
-                            <li><a href="work.html">Say</a></li>
-                            <li><a href="#">MyPublish</a></li>
-                            <li><a href="contact.html">Others</a></li>
+                            <li><a href="/toHome">Home</a></li>
+                            <li><a href="/user/getInformation">MyInformation</a></li>
+                            <li><a href="/writething">Publish</a></li>
+                            <li><a href="/say">Say</a></li>
+                            <li><a href="/getMyThing">MyPublish</a></li>
+                            <li><a href="/user/getAll">Others</a></li>
+                            <li><a href="/login">Login</a></li>
                           </ul>
                         </div><!-- /.navbar-collapse -->
                       </div><!-- /.container-fluid -->
@@ -73,7 +74,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="block">
-                        <h1>Write down our story</h1>
+                        <h3>Modify Your story</h3>
                     </div>
                 </div>
             </div>
@@ -86,19 +87,22 @@
          <div class="row">
            <div class="col-md-12 col-sm-12">
              <div class="block">
-               <form>
+               <form th:action="'/modifyThing/'+${thing.id}" enctype="multipart/form-data" method="post">
               	 
                  <div class="form-group">
-                   <input type="text" class="form-control" placeholder="Title">
+                   <input type="text" class="form-control" name="title" placeholder="Title" th:value="${thing.title}"/>
                  </div>
                  <div class="form-group">
-                   <input type="file" class="form-control" >
+                   <input type="file" name="picture" class="form-control" />
                  </div>
                  <div class="form-group-2">
-                   <textarea class="form-control" rows="6" placeholder="Your Story" style="height:200px;"></textarea>
+                   <textarea class="form-control" name="content" rows="6" th:value="${thing.content}" placeholder="Your Story" style="height:200px;"></textarea>
                  </div>
-                 <button class="btn btn-default" type="submit">Publish</button>
+                 <button class="btn btn-default" type="submit">Modify</button>
+                 
                </form>
+               <br/>
+                 <a th:href="'/deleteOneThing/'+${thing.id}"><button class="btn btn-default" >Delete</button></a>
              </div>
            </div>
            

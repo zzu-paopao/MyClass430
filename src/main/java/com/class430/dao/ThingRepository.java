@@ -10,5 +10,8 @@ public interface ThingRepository extends JpaRepository<Thing,Integer>{
 
 	List<Thing> getByUid(Integer userId);
 
+
+	Thing findOneById(Integer thingId);
+
 	
 }

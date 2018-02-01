@@ -9,4 +9,6 @@ public interface UserRepository extends JpaRepository<User,Integer>{
 	public User getTop1ByUsernameAndPassword(String username,String password);
 
 	public User getTop1ByUsername(String username);
+
+	public User getOneByUserId(Integer userId);
 }

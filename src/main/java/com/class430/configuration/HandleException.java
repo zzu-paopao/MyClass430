@@ -10,6 +10,7 @@ public class HandleException {
 	@ExceptionHandler(Exception.class)
 	public ModelAndView handler(Exception e){
 		ModelAndView model = new ModelAndView("error");
+		e.printStackTrace();
 		return model;
 	}
 }
