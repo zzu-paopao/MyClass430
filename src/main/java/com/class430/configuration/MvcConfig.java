@@ -6,7 +6,10 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.class430.interceptor.LoginInterceptor;
@@ -15,7 +18,12 @@ import com.class430.interceptor.LoginInterceptor;
 public class MvcConfig extends WebMvcConfigurerAdapter{
 	
 	
-
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		// TODO Auto-generated method stub
+		registry.addResourceHandler("picture");
+		super.addResourceHandlers(registry);
+	}
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
@@ -23,7 +31,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter{
 		registry.addRedirectViewController("/", "/toHome");
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/writething").setViewName("writething");
-		registry.addViewController("/say").setViewName("/writesay");
+		registry.addViewController("/say").setViewName("writesay");
+		registry.addViewController("/register").setViewName("register");
 		super.addViewControllers(registry);
 	}
 

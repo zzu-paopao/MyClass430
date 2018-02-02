@@ -31,25 +31,38 @@ public class LoginController {
 		return "error";
 	}
 	
+	@RequestMapping("/out")
+	public String out(HttpSession session){
+		session.setAttribute("userId", null);
+		return "redirect:/toHome";
+		
+	}
+	
 	@RequestMapping("/toRegister")
-	public String register(@RequestParam(name="username",defaultValue="无") String username
-			,@RequestParam(name="password",defaultValue="无") String password
-			,@RequestParam(name="phone",defaultValue="无")String phone
-			,@RequestParam(name="name",defaultValue="张三")String name){
+	public String register(@RequestParam(name="username",defaultValue="未填写") String username
+			,@RequestParam(name="password",defaultValue="未填写") String password
+			,@RequestParam(name="phone",defaultValue="未填写")String phone
+			,@RequestParam(name="name",defaultValue="未填写")String name){
 		
-		User user = userRepository.getTop1ByUsername(username);
-		
-		if(user==null){
-			user = new User();
-			user.setUsername(username);
-			user.setName(name);
-			user.setPassword(password);
-			user.setPhone(phone);
-			userRepository.saveAndFlush(user);
-			return "redirect:/toHome";
+		if(!username.equals("未填写")){
+			User user = userRepository.getTop1ByUsername(username);
+			
+			if(user==null){
+				user = new User();
+				user.setUsername(username);
+				user.setName(name);
+				user.setPassword(password);
+				user.setPhone(phone);
+				userRepository.saveAndFlush(user);
+				return "redirect:/toHome";
+			}else{
+				return "error";
+			}
 		}else{
 			return "error";
 		}
+		
+		
 		
 		
 	}

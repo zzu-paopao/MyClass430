@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"></meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-    <title>Airspace A template by Themefisher</title>
+    <title>Our430</title>
     <meta name="description" content=""></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -62,7 +62,8 @@
                             <li><a href="/say">Say</a></li>
                             <li><a href="/getMyThing">MyPublish</a></li>
                             <li><a href="/user/getAll">Others</a></li>
-                            <li><a href="/login">Login</a></li>
+                            <li th:if="${session.userId==null}"><a href="/login">Login</a></li>
+                            <li th:if="${session.userId!=null}"><a href="/out">Logout</a></li>
                           </ul>
                         </div><!-- /.navbar-collapse -->
                       </div><!-- /.container-fluid -->
@@ -92,13 +93,8 @@
               <div class="col-md-12">
                 <div class="block">
                   <div class="portfolio-menu">
-                    <ul> 
-                        <li class="filter" data-filter=".Branding">0</li>
-                        <li class="filter" data-filter=".Websites">1</li>
-                        <li class="filter" data-filter=".Graphic">2</li>
-                        <li class="filter" data-filter=".design">3</li>
-                        <li class="filter" data-filter=".Video">4</li>
-                        <li class="filter" data-filter="all">all</li>
+                    <ul th:each="page :${pages}"> 
+                        <li class="filter" data-filter=".Branding"><a th:text="${page}" th:href="'/toHome?page='+${page}"></a></li>
                     </ul>
                   </div>
                   <div class="portfolio-contant">
@@ -115,7 +111,6 @@
                            </div>
                          </a>
                       </li>
-                      
                     </ul>
                   </div>
                 </div>
@@ -123,13 +118,20 @@
             </div>
         </div>
     </section>
-
+	
+	
     <!-- Clients Logo Section Start -->
-    <section id="clients-logo-section">
-      <div class="container">
+    <section id="clients-logo-section" >
+      <div class="container" >
+      	<div class="row">
+      		<h2>Something:</h2>
+      		<br/><br/>
+      	
+      	</div>
         <div class="row">
           <div class="col-md-12">
             <div class="block">
+              
               <div id="clients-logo" class="owl-carousel">
                 <div class="clients-logo-img" th:each="say :${says}">
                    <p th:text="${say.content}"></p>

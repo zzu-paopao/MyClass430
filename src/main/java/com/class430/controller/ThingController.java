@@ -1,6 +1,7 @@
 package com.class430.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -36,9 +37,16 @@ public class ThingController {
 	SayRepository sayRepository;
 	
 	@RequestMapping("/toHome")
-	public String toHome(HttpServletRequest request,@RequestParam(name="page",defaultValue="0")Integer page){
+	public String toHome(HttpServletRequest request,@RequestParam(name="page",defaultValue="1")Integer page){
+		//new PageRequest(page, 9)
 		
-		Page<Thing> things = thingRepository.findAll(new PageRequest(page, 9));
+		long count = thingRepository.count();
+		Integer p = ((int)count/9)+1;
+		List<Integer> pages = new ArrayList<>();
+		for(int i = 0;i<p;i++){
+			pages.add(i+1);
+		}
+		Page<Thing> things = thingRepository.findAll(new PageRequest(page-1, 9));
 		
 		List<Say> says = sayRepository.findAll(new Sort(Direction.DESC, "time"));
 		if(says.size()>8){
@@ -47,6 +55,7 @@ public class ThingController {
 			says.subList(0, says.size());
 		}
 		
+		request.setAttribute("pages", pages);
 		request.setAttribute("things", things.getContent());
 		request.setAttribute("says", says);
 		
@@ -82,20 +91,22 @@ public class ThingController {
 		String filename;
 		if(picture!=null){
 			try {
-				filename=UUID.randomUUID().toString().substring(0,9).toString()
-						+picture.getOriginalFilename();
-				File file = new File(request.getRealPath("/web/picture/")+filename);
-				FileUtils.copyInputStreamToFile(picture.getInputStream()
-						, file);
-				
-				thing.setPicture("/web/picture/"+filename);
+				if(picture.getOriginalFilename()!=null&&!picture.getOriginalFilename().equals("")){
+					filename=UUID.randomUUID().toString().substring(0,9).toString()
+							+picture.getOriginalFilename();
+					File file = new File("static/picture/"+filename);
+					FileUtils.copyInputStreamToFile(picture.getInputStream()
+							, file);
+					
+					thing.setPicture("/picture/"+filename);
+				}else{
+					thing.setPicture("/img/timg.jpg");
+				}
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else{
-			thing.setPicture("/web/picture/timg.jpg");
 		}
 		thingRepository.save(thing);
 		
@@ -132,13 +143,22 @@ public class ThingController {
 		String filename;
 		if(picture!=null){
 			try {
-				filename=UUID.randomUUID().toString().substring(0,9).toString()
-						+picture.getOriginalFilename();
-				File file = new File(request.getRealPath("/web/picture/")+filename);
-				FileUtils.copyInputStreamToFile(picture.getInputStream()
-						, file);
 				
-				thing.setPicture("/web/picture/"+filename);
+				
+				
+				if(picture.getOriginalFilename()!=null&&!picture.getOriginalFilename().equals("")){
+					if(!thing.getPicture().equals("/img/timg.jpg")){
+						FileUtils.forceDelete(new File("static"+thing.getPicture()));
+					}
+					filename=UUID.randomUUID().toString().substring(0,9).toString()
+							+picture.getOriginalFilename();
+					File file = new File("static/picture/"+filename);
+					FileUtils.copyInputStreamToFile(picture.getInputStream()
+							, file);
+					
+					thing.setPicture("/picture/"+filename);
+				}
+				
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

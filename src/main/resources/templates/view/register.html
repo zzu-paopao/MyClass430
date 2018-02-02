@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8"></meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-    <title>Airspace A template by Themefisher</title>
+    <title>Register430</title>
     <meta name="description" content=""></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -58,7 +58,8 @@
                             <li><a href="/say">Say</a></li>
                             <li><a href="/getMyThing">MyPublish</a></li>
                             <li><a href="/user/getAll">Others</a></li>
-                            <li><a href="/login">Login</a></li>
+                            <li th:if="${session.userId==null}"><a href="/login">Login</a></li>
+                            <li th:if="${session.userId!=null}"><a href="/out">Logout</a></li>
                           </ul>
                         </div><!-- /.navbar-collapse -->
                       </div><!-- /.container-fluid -->
@@ -81,16 +82,16 @@
                <form action="/toRegister">
               	 
                  <div class="form-group">
-                   <input type="text" class="form-control" name="username" placeholder="username(example:43049)">
+                   <input type="text" class="form-control" name="username" placeholder="username(example:43049)"/>
                  </div>
                  <div class="form-group">
-                   <input type="text" class="form-control" name="password" placeholder="password">
+                   <input type="text" class="form-control" name="password" placeholder="password"/>
                  </div>
                  <div class="form-group">
-                   <input type="text" class="form-control" name="name" placeholder="name">
+                   <input type="text" class="form-control" name="name" placeholder="name"/>
                  </div>
                  <div class="form-group">
-                   <input type="text" class="form-control" name="phone" placeholder="phone">
+                   <input type="text" class="form-control" name="phone" placeholder="phone"/>
                  </div>
                  
                  <button class="btn btn-default" type="submit">Register</button>
