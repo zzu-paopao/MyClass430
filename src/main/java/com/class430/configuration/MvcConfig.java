@@ -17,14 +17,12 @@ import com.class430.interceptor.LoginInterceptor;
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter{
 	
-	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-		registry.addResourceHandler("picture");
+		registry.addResourceHandler("/picture/**").addResourceLocations("file:/root/class430/picture/");
 		super.addResourceHandlers(registry);
 	}
-
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		// TODO Auto-generated method stub

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
@@ -26,6 +27,7 @@ import com.class430.dao.SayRepository;
 import com.class430.dao.ThingRepository;
 import com.class430.entity.Say;
 import com.class430.entity.Thing;
+import com.class430.util.WebPrint;
 
 @Controller
 public class ThingController {
@@ -37,7 +39,7 @@ public class ThingController {
 	SayRepository sayRepository;
 	
 	@RequestMapping("/toHome")
-	public String toHome(HttpServletRequest request,@RequestParam(name="page",defaultValue="1")Integer page){
+	public String toHome(HttpServletRequest request,@RequestParam(name="page",defaultValue="1")Integer page,HttpServletResponse response){
 		//new PageRequest(page, 9)
 		
 		long count = thingRepository.count();
@@ -58,7 +60,6 @@ public class ThingController {
 		request.setAttribute("pages", pages);
 		request.setAttribute("things", things.getContent());
 		request.setAttribute("says", says);
-		
 		return "home";
 	}
 	
@@ -94,7 +95,7 @@ public class ThingController {
 				if(picture.getOriginalFilename()!=null&&!picture.getOriginalFilename().equals("")){
 					filename=UUID.randomUUID().toString().substring(0,9).toString()
 							+picture.getOriginalFilename();
-					File file = new File("static/picture/"+filename);
+					File file = new File("picture/"+filename);
 					FileUtils.copyInputStreamToFile(picture.getInputStream()
 							, file);
 					
@@ -148,11 +149,11 @@ public class ThingController {
 				
 				if(picture.getOriginalFilename()!=null&&!picture.getOriginalFilename().equals("")){
 					if(!thing.getPicture().equals("/img/timg.jpg")){
-						FileUtils.forceDelete(new File("static"+thing.getPicture()));
+						FileUtils.forceDelete(new File(thing.getPicture().substring(1)));
 					}
 					filename=UUID.randomUUID().toString().substring(0,9).toString()
 							+picture.getOriginalFilename();
-					File file = new File("static/picture/"+filename);
+					File file = new File("picture/"+filename);
 					FileUtils.copyInputStreamToFile(picture.getInputStream()
 							, file);
 					
